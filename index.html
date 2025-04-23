@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sina Aryanezhad | Personal Portfolio</title>
+    <!-- Link to External CSS -->
+	<link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./image/logo.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Sina Aryanezhad</h1>
+        <p>Graphic Designer | Website Developer</p>
+    </header>
+  <div class="container1">  
+    <div class="information">
+            <img src="./image/s1.png" alt="Sina Aryanezhad" >
+        <div class="inf"
+        <h2>Contact information</h2>
+        <p>📞 Phone: (+98) 938 694 2183</p>
+        <p>✉️ Email: <a href="mailto:SINA_ARYANEZHAD@YAHOO.COM" target="_blank">Send Email</a></p>
+        <p>💬 Instagram: <a href="instagram://user?username=sinaaryanezhad" target="_blank">My Instagram</a></p>
+        <p>📱 Telegram: <a href="https://t.me/cna_78" target="_blank">My Telegram</a></p>
+        </div>
+  </div>
+    </div>
+    <!-- Introduction Section -->
+    <div class="container">
+        <section class="section" style="display: block;" id="about">
+            <h2>About Me</h2>
+            <div class="info">
+                <div>
+                    <p>
+                        I am a professional graphic designer and web developer with over 3 years of experience. 
+                        Skilled in creating logos, posters, advertising cards, and programming websites.
+                    </p>
+                </div>
+                
+            </div>
+        </section>
+        <!-- Skills Section -->
+        <section class="section" style="display: none;" id="skills">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div>
+                    <h3>Photoshop (Ps)</h3>
+                    <div class="skill-container">
+                        <span class="percentage">80%</span>
+                        <div class="bar" style="width: 800%;" aria-label="80% proficiency in Photoshop"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>CorelDRAW (Cd)</h3>
+                    <div class="skill-container">
+                        <span class="percentage">60%</span>
+                        <div class="bar" style="width: 60%;" aria-label="60% proficiency in CorelDRAW"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Illustrator (Ai)</h3>
+                    <div class="skill-container">
+                        <span class="percentage">70%</span>
+                        <div class="bar" style="width: 70%;" aria-label="70% proficiency in Illustrator"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Artworks Section -->
+        <section class="section" style="display: none;" id="art">
+            <h2>My Artworks</h2>
+            <div class="artworks">
+                <img src="image/1.jpg" alt="Artwork 1">
+                <img src="image/2.jpg" alt="Artwork 2">
+                <img src="image/4.jpg" alt="Artwork 3">
+                <img src="image/3.jpg" alt="Artwork 4">
+            </div>
+        </section>
+        </div>
+        <section id="contact" class="section" style="display:none;">
+            <h2>Contact Me</h2>
+            <form id="contactForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Your Message" rows="2" required></textarea>
+                <button type="submit">Send Message</button>
+                <p id="formResponse" style="display: none; color: green; margin-top: 10px;"></p>
+            </form>
+        </section>
+        
+</body>
+
+        <div class="menu">
+            <a class="about" href="#about" >About Me </a>
+            <a class="skill" href="#skills">Skills</a> 
+            <a class="art" href="#art">Art Works</a>
+            <a class="contact" href="#contact">Contact Me</a>
+        </div>
+
+
+     <footer>
+    Website by Sina Aryanezhad &copy; 2024
+    </footer>
+    <script>
+            //nav list
+        const navLinks = document.querySelectorAll('div a');
+        const contents = document.querySelectorAll('.section');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        contents.forEach(content => content.style.display = 'none');
+        document.getElementById(this.getAttribute('href').substring(1)).style.display = 'block';
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+});
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            // URL of your Google Apps Script
+            const url = 'https://script.google.com/macros/s/AKfycbymTiN9PWyZC0jKk3TH26tIDbYMPeKwtXATQ1P1SL6SIsmbIzrFU5sOPEcrPNIIg9eS/exec';
+            // Create an object of data to send
+            const data = {
+                name: name,
+                email: email,
+                message: message,
+                time1: new Date()
+            };
+    
+            // Use Fetch API to send the data
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(data)
+            })
+            .then(response => response.text())
+            .then(responseText => {
+                const formResponse = document.getElementById('formResponse');
+                if (responseText === "Success") {
+                    
+                    
+
+
+
+                    formResponse.textContent = "Message sent successfully!";
+                    formResponse.style.display = "block";
+                    formResponse.style.color = "green";
+                } else {
+                    formResponse.textContent = "Error sending message.";
+                    formResponse.style.display = "block";
+                    formResponse.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                const formResponse = document.getElementById('formResponse');
+                formResponse.textContent = "Error sending message.";
+                formResponse.style.display = "block";
+                formResponse.style.color = "red";
+            });
+        });
+        
+    </script>
+
+</html>
